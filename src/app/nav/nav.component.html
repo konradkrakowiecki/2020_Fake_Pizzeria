@@ -4,11 +4,13 @@
   <ng-template #anonymousUser>
     <div><a routerLink="/login">Zaloguj się</a></div>
   </ng-template>
-  <div *ngIf="auth.user$ | async as user; else anonymousUser">{{ user.displayName }}
+  <div *ngIf="appUser else anonymousUser">{{ appUser.name }}
     <div>
       <div><a routerLink="/my/orders">Moje Zamówienia</a></div>
-      <div><a routerLink="/admin/orders">Zarządzaj Zamówieniami</a></div>
-      <div><a routerLink="/admin/products">Zarządzaj Produktami</a></div>
+      <ng-container *ngIf="appUser.isAdmin">
+        <div><a routerLink="/admin/orders">Zarządzaj Zamówieniami</a></div>
+        <div><a routerLink="/admin/products">Zarządzaj Produktami</a></div>
+      </ng-container>
       <div style="cursor: pointer"><a (click)="logout()">Wyloguj się</a></div>
     </div>
   </div>
