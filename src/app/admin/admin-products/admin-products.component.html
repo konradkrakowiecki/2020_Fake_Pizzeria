@@ -1,1 +1,20 @@
-<p>admin-products works!</p>
+<input type="text" (keyup)="filter($event.target.value)" placeholder="Szukaj...">
+
+<table>
+  <thead>
+  <tr>
+    <th>Nazwa</th>
+    <th>Cena</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of filteredProducts">
+    <td>{{product.title}}</td>
+    <td>{{product.price | number:'.2-2'}}</td>
+    <td><a [routerLink]="['/admin/products/', product.key]">Edit</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<button routerLink="/admin/products/new">Nowy Produkt</button>

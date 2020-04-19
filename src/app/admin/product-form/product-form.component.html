@@ -1,0 +1,51 @@
+<div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+  <div  style="width: 50%">
+    <form #form="ngForm" (ngSubmit)="save(form.value)">
+      <div>
+        <label for="title">Nazwa</label>
+        <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" id="title" required>
+        <div *ngIf="title.touched && title.invalid" style="color: red">Nazwa jest wymagana!</div>
+      </div>
+      <div>
+        <label for="price">Cena</label>
+        <input #price="ngModel" [(ngModel)]="product.price" name="price" type="number" id="price" required [min]="0.01">
+        <div *ngIf="price.touched && price.invalid" style="color: red">
+          <div *ngIf="price.errors.required">Cena jest wymagana!</div>
+          <div *ngIf="price.errors.min">Cena musi być więkasza od 0!</div>
+        </div>
+      </div>
+      <div>
+        <label for="category">Kategoria</label>
+        <select #category="ngModel" [(ngModel)]="product.category" name="category" type="text" id="category" required>
+          <option value=""></option>
+          <option *ngFor="let category of categories$ | async" [value]="category.name">
+            {{category.name}}
+          </option>
+        </select>
+        <div *ngIf="category.touched && category.invalid" style="color: red">Kategoria jest wymagana!</div>
+      </div>
+      <div>
+        <label for="imageUrl">URL do zdjęcia</label>
+        <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" type="text" id="imageUrl" required url>
+        <div *ngIf="imageUrl.touched && imageUrl.invalid" style="color: red">
+          <div *ngIf="imageUrl.errors.required">Adres URL jest wymagany!</div>
+          <div *ngIf="imageUrl.errors.url">Adres URL ma zły format!</div>
+        </div>
+      </div>
+      <div>
+        <label for="description">Opis</label>
+        <input #description="ngModel" [(ngModel)]="product.description" name="description" type="text" id="description">
+      </div>
+      <button>Zapisz</button>
+      <button type="button" (click)="delete()">Usuń</button>
+    </form>
+  </div>
+  <div style="width: 25%; background-color: lightslategrey">
+    <h3>{{product.title}}</h3>
+    <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Product image">
+    <h3>{{product.price | number:'.2-2'}} zł</h3>
+    <h4>{{product.category}}</h4>
+    <p>{{product.description}}</p>
+  </div>
+</div>
+
