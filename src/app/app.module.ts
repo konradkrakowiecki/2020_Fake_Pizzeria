@@ -29,6 +29,8 @@ import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule, MatCardModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCardModule
   ],
   providers: [
     AuthService,

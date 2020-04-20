@@ -1,51 +1,84 @@
-<div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
-  <div  style="width: 50%">
-    <form #form="ngForm" (ngSubmit)="save(form.value)">
-      <div>
-        <label for="title">Nazwa</label>
-        <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" id="title" required>
-        <div *ngIf="title.touched && title.invalid" style="color: red">Nazwa jest wymagana!</div>
-      </div>
-      <div>
-        <label for="price">Cena</label>
-        <input #price="ngModel" [(ngModel)]="product.price" name="price" type="number" id="price" required [min]="0.01">
-        <div *ngIf="price.touched && price.invalid" style="color: red">
-          <div *ngIf="price.errors.required">Cena jest wymagana!</div>
-          <div *ngIf="price.errors.min">Cena musi być więkasza od 0!</div>
+<div class="container" style="margin-top: 20px">
+
+  <div class="row">
+
+    <div class="col">
+      <form #form="ngForm" (ngSubmit)="save(form.value)">
+        <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label for="title">Nazwa</mat-label>
+            <input matInput #title="ngModel" [(ngModel)]="product.title" name="title" type="text" id="title" required placeholder="Nazwa...">
+            <mat-hint>Podaj nazwę produktu.</mat-hint>
+            <mat-error *ngIf="title.touched && title.invalid">Nazwa jest wymagana!</mat-error>
+          </mat-form-field>
         </div>
-      </div>
-      <div>
-        <label for="category">Kategoria</label>
-        <select #category="ngModel" [(ngModel)]="product.category" name="category" type="text" id="category" required>
-          <option value=""></option>
-          <option *ngFor="let category of categories$ | async" [value]="category.name">
-            {{category.name}}
-          </option>
-        </select>
-        <div *ngIf="category.touched && category.invalid" style="color: red">Kategoria jest wymagana!</div>
-      </div>
-      <div>
-        <label for="imageUrl">URL do zdjęcia</label>
-        <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" type="text" id="imageUrl" required url>
-        <div *ngIf="imageUrl.touched && imageUrl.invalid" style="color: red">
-          <div *ngIf="imageUrl.errors.required">Adres URL jest wymagany!</div>
-          <div *ngIf="imageUrl.errors.url">Adres URL ma zły format!</div>
+
+        <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label for="price">Cena</mat-label>
+            <input matInput #price="ngModel" [(ngModel)]="product.price" name="price" type="number" id="price" required [min]="0.01" placeholder="Cena...">
+            <mat-hint>Podaj cenę produktu.</mat-hint>
+            <mat-error *ngIf="price.touched && price.invalid">
+              <mat-error *ngIf="price.errors.required">Cena jest wymagana!</mat-error>
+              <mat-error *ngIf="price.errors.min">Cena musi być więkasza od 0!</mat-error>
+            </mat-error>
+          </mat-form-field>
         </div>
-      </div>
-      <div>
-        <label for="description">Opis</label>
-        <input #description="ngModel" [(ngModel)]="product.description" name="description" type="text" id="description">
-      </div>
-      <button>Zapisz</button>
-      <button type="button" (click)="delete()">Usuń</button>
-    </form>
+
+        <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label for="category">Kategoria</mat-label>
+            <mat-select matInput #category="ngModel" [(ngModel)]="product.category" name="category" type="text" id="category" required>
+              <mat-option *ngFor="let category of categories$ | async" [value]="category.name">{{category.name}}</mat-option>
+            </mat-select>
+            <mat-hint>Podaj kategorię produktu.</mat-hint>
+            <mat-error *ngIf="price.touched && price.invalid">Kategoria jest wymagana!</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label for="imageUrl">URL do zdjęcia</mat-label>
+            <input matInput #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" type="text" id="imageUrl" required url placeholder="http:// lub https://">
+            <mat-hint>Podaj adres URL do zdjęcia.</mat-hint>
+            <mat-error *ngIf="imageUrl.touched && imageUrl.invalid">
+              <mat-error *ngIf="imageUrl.errors.required">Adres URL jest wymagany!</mat-error>
+              <mat-error *ngIf="imageUrl.errors.url">Adres URL ma zły format!</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label for="description">Opis</mat-label>
+            <input matInput #description="ngModel" [(ngModel)]="product.description" name="description" type="text" id="description" placeholder="Opis...">
+            <mat-hint>Podaj opis produktu.</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-flat-button color="primary" style="margin-right: 10px">Zapisz</button>
+          <button mat-flat-button type="button" (click)="delete()" color="primary">Usuń</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col">
+      <mat-card *ngIf="product.title" style="max-width: 250px">
+        <mat-card-header>
+          <img mat-card-avatar *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Product image">
+          <mat-card-title>{{product.title}}</mat-card-title>
+          <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Product image">
+        <mat-card-content style="text-align: center">
+          <p>Opis: {{product.description}}</p>
+        </mat-card-content>
+        <p style="text-align: center">Cena: {{product.price | number:'.2-2'}} zł</p>
+      </mat-card>
+    </div>
+
   </div>
-  <div style="width: 25%; background-color: lightslategrey" *ngIf="product.title">
-    <h3>{{product.title}}</h3>
-    <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Product image">
-    <h3>{{product.price | number:'.2-2'}} zł</h3>
-    <h4>{{product.category}}</h4>
-    <p>{{product.description}}</p>
-  </div>
+
 </div>
 
