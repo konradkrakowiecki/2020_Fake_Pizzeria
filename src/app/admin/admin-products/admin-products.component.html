@@ -1,20 +1,29 @@
 <input type="text" (keyup)="filter($event.target.value)" placeholder="Szukaj...">
+<div style="width: 60%; margin-left: auto; margin-right: auto">
+  <data-table [title]="'Produkty'" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+    <data-table-column [property]="title" [header]="'Nazwa'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="item">
+        {{item.title}}
+      </ng-template>
+    </data-table-column>
 
-<table>
-  <thead>
-  <tr>
-    <th>Nazwa</th>
-    <th>Cena</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let product of filteredProducts">
-    <td>{{product.title}}</td>
-    <td>{{product.price | number:'.2-2'}}</td>
-    <td><a [routerLink]="['/admin/products/', product.key]">Edit</a></td>
-  </tr>
-  </tbody>
-</table>
+    <data-table-column [property]="price" [header]="'Cena'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="item">
+        {{item.price | number:'.2-2'}}
+      </ng-template>
+    </data-table-column>
 
+    <data-table-column [property]="category" [header]="'Kategoria'" [sortable]="true" [resizable]="true">
+      <ng-template #dataTableCell let-item="item">
+        {{item.category}}
+      </ng-template>
+    </data-table-column>
+
+    <data-table-column [property]="key">
+      <ng-template #dataTableCell let-item="item">
+        <a [routerLink]="['/admin/products/', item.key]">Edit</a>
+      </ng-template>
+    </data-table-column>
+  </data-table>
+</div>
 <button routerLink="/admin/products/new">Nowy Produkt</button>

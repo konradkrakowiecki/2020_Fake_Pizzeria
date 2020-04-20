@@ -40,7 +40,7 @@
       <button type="button" (click)="delete()">Usuń</button>
     </form>
   </div>
-  <div style="width: 25%; background-color: lightslategrey">
+  <div style="width: 25%; background-color: lightslategrey" *ngIf="product.title">
     <h3>{{product.title}}</h3>
     <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Product image">
     <h3>{{product.price | number:'.2-2'}} zł</h3>
