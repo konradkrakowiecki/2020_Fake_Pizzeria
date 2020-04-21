@@ -1,17 +1,19 @@
-<nav style="display: flex; flex-direction: row; justify-content: space-between; background-color: gray ">
-  <div routerLink="/">Fake Pizzeria</div>
-  <div><a routerLink="/shopping-cart">Zakupy</a></div>
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" style="position: relative!important; z-index: 1!important">
+  <div class="navbar-brand mr-auto" routerLink="/">Fake Pizzeria</div>
+
+  <button mat-button routerLink="/shopping-cart" color="primary" class="mr-2">Zakupy</button>
   <ng-template #anonymousUser>
-    <div><a routerLink="/login">Zaloguj się</a></div>
+    <button mat-flat-button routerLink="/login" color="primary">Zaloguj się</button>
   </ng-template>
-  <div *ngIf="appUser else anonymousUser">{{ appUser.name }}
-    <div>
-      <div><a routerLink="/my/orders">Moje Zamówienia</a></div>
+  <div *ngIf="appUser else anonymousUser">
+    <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" style="position: relative!important; z-index: 10!important">{{ appUser.name }}</button>
+    <mat-menu #menu="matMenu" class="mt-2">
+      <button mat-menu-item routerLink="/my/orders">Moje Zamówienia</button>
       <ng-container *ngIf="appUser.isAdmin">
-        <div><a routerLink="/admin/orders">Zarządzaj Zamówieniami</a></div>
-        <div><a routerLink="/admin/products">Zarządzaj Produktami</a></div>
+        <button mat-menu-item routerLink="/admin/orders">Zarządzaj Zamówieniami</button>
+        <button mat-menu-item routerLink="/admin/products">Zarządzaj Produktami</button>
       </ng-container>
-      <div style="cursor: pointer"><a (click)="logout()">Wyloguj się</a></div>
-    </div>
+      <button mat-menu-item (click)="logout()">Wyloguj się</button>
+    </mat-menu>
   </div>
 </nav>

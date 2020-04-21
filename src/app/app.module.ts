@@ -29,7 +29,17 @@ import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule, MatCardModule} from '@angular/material';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatCardModule,
+  MatListModule,
+  MatMenuModule
+} from '@angular/material';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +54,9 @@ import {MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule, MatCa
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +72,9 @@ import {MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule, MatCa
     MatButtonModule,
     MatOptionModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatMenuModule
   ],
   providers: [
     AuthService,

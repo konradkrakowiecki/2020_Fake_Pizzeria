@@ -27,9 +27,7 @@ export class ProductService {
                 const data = item.payload.val();
                 const key = item.payload.key;
                 return { key, ...data };
-                })
-                )
-            );
+      })));
   }
 
   get(productId) {
