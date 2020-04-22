@@ -29,7 +29,7 @@
           <mat-form-field appearance="outline" [hideRequiredMarker]="true">
             <mat-label for="category">Kategoria</mat-label>
             <mat-select matInput #category="ngModel" [(ngModel)]="product.category" name="category" type="text" id="category" required>
-              <mat-option *ngFor="let category of categories$ | async" [value]="category.key">{{category.name}}</mat-option>
+              <mat-option *ngFor="let category of categories$ | async" [value]="category">{{category.name}}</mat-option>
             </mat-select>
             <mat-hint>Podaj kategorię produktu.</mat-hint>
             <mat-error *ngIf="price.touched && price.invalid">Kategoria jest wymagana!</mat-error>

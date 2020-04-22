@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" style="position: relative!important; z-index: 1!important">
   <div class="navbar-brand mr-auto" routerLink="/">Fake Pizzeria</div>
-
-  <button mat-button routerLink="/shopping-cart" color="primary" class="mr-2">Zakupy</button>
+  <button mat-flat-button routerLink="/products" color="primary" class="mr-2">Menu</button>
+  <button mat-flat-button matBadge="{{(shoppingCartItemCount === 0) ? '' : shoppingCartItemCount}}" matBadgePosition="below before" matBadgeColor="accent" routerLink="/shopping-cart" color="primary" class="mr-2">Koszyk</button>
   <ng-template #anonymousUser>
     <button mat-flat-button routerLink="/login" color="primary">Zaloguj się</button>
   </ng-template>

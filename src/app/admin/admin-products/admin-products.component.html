@@ -28,7 +28,7 @@
 
       <data-table-column [property]="category" [header]="'Kategoria'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
-          {{item.category}}
+          {{item.category.name}}
         </ng-template>
       </data-table-column>
 

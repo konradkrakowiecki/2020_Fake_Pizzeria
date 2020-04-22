@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -27,7 +28,9 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShoppingCartService } from './shopping-cart.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 import {
   MatInputModule,
@@ -36,10 +39,9 @@ import {
   MatSelectModule,
   MatCardModule,
   MatListModule,
-  MatMenuModule
+  MatMenuModule,
+  MatBadgeModule
 } from '@angular/material';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     MatSelectModule,
     MatCardModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBadgeModule
   ],
   providers: [
     AuthService,
@@ -82,7 +85,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AdminAuthGuardService,
     UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

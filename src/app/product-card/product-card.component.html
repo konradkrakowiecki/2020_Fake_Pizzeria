@@ -1,15 +1,25 @@
-<mat-card *ngIf="product.title" style="width: 250px">
+<mat-card *ngIf="product.title" style="width: 255px; margin: 10px 0 10px 0;">
   <mat-card-header>
     <img mat-card-avatar *ngIf="product.imageUrl" [src]="product.imageUrl" alt="{{product.title}}">
     <mat-card-title>{{product.title}}</mat-card-title>
-    <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+    <mat-card-subtitle>{{product.category.name}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image *ngIf="product.imageUrl" [src]="product.imageUrl" width="250" height="250" alt="{{product.title}}">
   <mat-card-content style="text-align: center">
-    <p>Opis: {{product.description}}</p>
+    <p>{{product.description}}</p>
   </mat-card-content>
-  <mat-card-actions style="display: flex; flex-direction: row; justify-content: space-between; align-items: baseline">
-    <button mat-button *ngIf="showActions">Do koszyka</button>
-    <p>{{product.price | number:'.2-2'}} zł</p>
-  </mat-card-actions>
+  <p style="text-align: center" class="mb-3">{{product.price | number:'.2-2'}} zł</p>
+  <ng-container *ngIf="showActions" >
+    <button *ngIf="getQuantity() === 0; else updateQuantity" mat-flat-button color="primary" style="width: 100%" (click)="addToCart()">Do koszyka</button>
+    <ng-template #updateQuantity>
+      <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: baseline">
+        <div><button mat-flat-button color="primary" (click)="removeFromCart()">-</button></div>
+        <div>
+          {{getQuantity()}}
+          szt.</div>
+        <div><button mat-flat-button color="primary" (click)="addToCart()">+</button></div>
+      </div>
+    </ng-template>
+  </ng-container>
+  <button mat-flat-button *ngIf="!showActions" disabled style="width: 100%">Do koszyka</button>
 </mat-card>
