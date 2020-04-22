@@ -1,1 +1,40 @@
-<p>shopping-cart works!</p>
+<div class="container">
+  <h1>Koszyk:</h1>
+  <ng-container *ngIf="cart$">
+    <p>Liczba produktów w koszyku: {{totalCount}}.</p>
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th>Nazwa</th>
+        <th  class="text-center" style="width: 250px">Ilość</th>
+        <th class="text-right" style="width: 200px">Cena</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let productId of productIds">
+        <td>
+          <div class="thumbnail" [style.backgroundImage]="'url(' + cart$[productId].product.imageUrl + ')'"></div>
+        </td>
+        <td>{{cart$[productId].product.title}}</td>
+        <td>
+          <app-product-quantity [product]="cart$[productId]" [shopping-cart]="cart$"></app-product-quantity></td>
+        <td class="text-right">{{cart$[productId].quantity * cart$[productId].product.price | number:'.2-2'}} zł</td>
+      </tr>
+      </tbody>
+      <tfoot class="thead-dark">
+      <th>SUMA</th>
+      <th></th>
+      <th></th>
+      <th class="text-right">{{totalPrice | number:'.2-2'}} zł</th>
+      </tfoot>
+    </table>
+
+    <button mat-flat-button color="warn" (click)="clearCart()">Wyczyść koszyk</button>
+  </ng-container>
+</div>
+
+
+
+

@@ -12,13 +12,7 @@
   <ng-container *ngIf="showActions" >
     <button *ngIf="getQuantity() === 0; else updateQuantity" mat-flat-button color="primary" style="width: 100%" (click)="addToCart()">Do koszyka</button>
     <ng-template #updateQuantity>
-      <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: baseline">
-        <div><button mat-flat-button color="primary" (click)="removeFromCart()">-</button></div>
-        <div>
-          {{getQuantity()}}
-          szt.</div>
-        <div><button mat-flat-button color="primary" (click)="addToCart()">+</button></div>
-      </div>
+      <app-product-quantity [product]="product" [shopping-cart]="shoppingCart"></app-product-quantity>
     </ng-template>
   </ng-container>
   <button mat-flat-button *ngIf="!showActions" disabled style="width: 100%">Do koszyka</button>

@@ -18,10 +18,6 @@ export class ProductCardComponent {
     this.shoppingCartService.addToCart(this.product);
   }
 
-  removeFromCart() {
-    this.shoppingCartService.removeFromCart(this.product);
-  }
-
   getQuantity() {
     if (this.shoppingCart === null || this.shoppingCart === undefined || !this.shoppingCart.hasOwnProperty('items')) { return 0; }
     const item = this.shoppingCart.items[this.product.key];

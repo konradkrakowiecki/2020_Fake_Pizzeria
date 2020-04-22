@@ -42,6 +42,7 @@ import {
   MatMenuModule,
   MatBadgeModule
 } from '@angular/material';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

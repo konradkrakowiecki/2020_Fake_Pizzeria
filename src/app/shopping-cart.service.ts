@@ -11,12 +11,6 @@ export class ShoppingCartService {
 
   constructor(private dataBase: AngularFireDatabase) { }
 
-  private create() {
-    return this.dataBase.list('shopping-carts').push({
-      dateCreated: new Date().getTime()
-    });
-  }
-
   async getCart(): Promise<AngularFireObject<ShoppingCart>> {
     const cartId = await this.getOrCreateCartId();
     return this.dataBase.object(`/shopping-carts/${cartId}`);
@@ -27,16 +21,16 @@ export class ShoppingCartService {
     return this.dataBase.object(`/shopping-carts/${cartId}`);
   }
 
-  private getItem(cartId: string, productId: string) {
-    return this.dataBase.object(`/shopping-carts/${cartId}/items/${productId}`);
-  }
-
-  private async getOrCreateCartId() {
-    const cardId = localStorage.getItem('cartId');
-    if (cardId) { return cardId; }
-    const result = await this.create();
-    localStorage.setItem('cartId', result.key);
-    return result.key;
+  async removeFromCart(product: Product) {
+    const cartId = await this.getOrCreateCartId();
+    const item$ = this.getItem(cartId, product.key);
+    item$.snapshotChanges().pipe(take(1)).subscribe(item => {
+      const itemInCart: any = item.payload.val();
+      item$.update({product, quantity: (itemInCart.quantity) - 1});
+      if (itemInCart.quantity === 1) {
+        item$.remove();
+      }
+    });
   }
 
   async addToCart(product: Product) {
@@ -53,13 +47,27 @@ export class ShoppingCartService {
     });
   }
 
-  async removeFromCart(product: Product) {
+  async clearCart() {
     const cartId = await this.getOrCreateCartId();
-    const item$ = this.getItem(cartId, product.key);
-    item$.snapshotChanges().pipe(take(1)).subscribe(item => {
-      const itemInCart: any = item.payload.val();
-      item$.update({product, quantity: (itemInCart.quantity) - 1});
+    this.dataBase.object(`/shopping-carts/${cartId}/items`).remove();
+  }
+
+  private create() {
+    return this.dataBase.list('shopping-carts').push({
+      dateCreated: new Date().getTime()
     });
+  }
+
+  private getItem(cartId: string, productId: string) {
+    return this.dataBase.object(`/shopping-carts/${cartId}/items/${productId}`);
+  }
+
+  private async getOrCreateCartId() {
+    const cardId = localStorage.getItem('cartId');
+    if (cardId) { return cardId; }
+    const result = await this.create();
+    localStorage.setItem('cartId', result.key);
+    return result.key;
   }
 
 }
