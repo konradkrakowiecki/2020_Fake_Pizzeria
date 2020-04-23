@@ -2,7 +2,7 @@
   <mat-action-list style="margin-top: 20px">
     <div mat-subheader>Menu:</div>
     <button mat-list-item routerLink="/" [class.active]="!category">Wszystkie kategorie</button>
-    <button mat-list-item *ngFor="let category of categories$ | async" routerLink="/" [queryParams]="{ category: category.key }" [class.active]="category === category.key">
+    <button mat-list-item *ngFor="let category of categories$ | async" routerLink="/products" [queryParams]="{ category: category.key }" [class.active]="category === category.key">
       {{category.name}}
     </button>
   </mat-action-list>
