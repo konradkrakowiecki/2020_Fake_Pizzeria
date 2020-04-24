@@ -43,6 +43,8 @@ import {
   MatBadgeModule
 } from '@angular/material';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import {OrderService} from './order.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     UserService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

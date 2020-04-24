@@ -1,44 +1,47 @@
 <div class="container">
   <h2>Zmówienie</h2>
+  <div class="row">
+    <div class="col-6"><form #form="ngForm">
+      <div>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <mat-label for="name">Imię i nazwisko</mat-label>
+          <input matInput #name="ngModel" name="name" [(ngModel)]="shipping.name" type="text" id="name" required placeholder="Imię i nazwisko...">
+          <mat-hint>Poadaj imię i nazwisko</mat-hint>
+          <mat-error *ngIf="name.touched && name.invalid" >Imię i nazwisko są wymagane!</mat-error>
+        </mat-form-field>
+      </div>
 
-  <form #form="ngForm">
-    <div>
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <mat-label for="name">Imię i nazwisko</mat-label>
-        <input matInput #name="ngModel" name="name" [(ngModel)]="shipping.name" type="text" id="name" required placeholder="Imię i nazwisko...">
-        <mat-hint>Poadaj imię i nazwisko</mat-hint>
-        <mat-error *ngIf="name.touched && name.invalid" >Imię i nazwisko są wymagane!</mat-error>
-      </mat-form-field>
-    </div>
+      <div>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <mat-label for="addressLine1">Adres</mat-label>
+          <input matInput #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text" id="addressLine1" required placeholder="Adres...">
+          <mat-hint>Podaj adres.</mat-hint>
+          <mat-error *ngIf="addressLine1.touched && addressLine1.invalid">Adres jest wymagany!</mat-error>
+        </mat-form-field>
+      </div>
 
-    <div>
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <mat-label for="addressLine1">Adres</mat-label>
-        <input matInput #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text" id="addressLine1" required placeholder="Adres...">
-        <mat-hint>Podaj adres.</mat-hint>
-        <mat-error *ngIf="addressLine1.touched && addressLine1.invalid">Adres jest wymagany!</mat-error>
-      </mat-form-field>
-    </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label for="addressLine2">Adres</mat-label >
+          <input matInput #addressLine2="ngModel" name="addressLine2" [(ngModel)]="shipping.addressLine2" type="text" id="addressLine2" placeholder="Adres...">
+          <mat-hint>Dodatkowa linia na adres.</mat-hint>
+        </mat-form-field>
+      </div>
 
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label for="addressLine2">Adres</mat-label >
-        <input matInput #addressLine2="ngModel" name="addressLine2" [(ngModel)]="shipping.addressLine2" type="text" id="addressLine2" placeholder="Adres...">
-        <mat-hint>Dodatkowa linia na adres.</mat-hint>
-      </mat-form-field>
+      <div>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <mat-label for="city">Miasto</mat-label>
+          <input matInput #city="ngModel" name="city" [(ngModel)]="shipping.city" id="city" type="text" required placeholder="Miasto...">
+          <mat-hint>Podaj miasto.</mat-hint>
+          <mat-error *ngIf="city.touched && city.invalid">Miasto jest wymagane!</mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button *ngIf="form.valid" color="primary" (click)="placeOrder()">Zamów</button>
+      <button mat-flat-button disabled *ngIf="!form.valid">Zamów</button>
+    </form></div>
+    <div class="col-6">
+      <app-shopping-cart-summary *ngIf="cart" [cart]="cart"></app-shopping-cart-summary>
     </div>
+  </div>
 
-    <div>
-      <mat-form-field appearance="outline" [hideRequiredMarker]="true">
-        <mat-label for="city">Miasto</mat-label>
-        <input matInput #city="ngModel" name="city" [(ngModel)]="shipping.city" id="city" type="text" required placeholder="Miasto...">
-        <mat-hint>Podaj miasto.</mat-hint>
-        <mat-error *ngIf="city.touched && city.invalid">Miasto jest wymagane!</mat-error>
-      </mat-form-field>
-    </div>
-    <button
-      (click)="placeOrder()"
-      class="btn btn-primary">Place Order</button>
-  </form>
 </div>
-

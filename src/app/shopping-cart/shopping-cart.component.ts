@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,8 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   async ngOnInit() {
     const cart$ = await this.shoppingCartService.getCart();
     cart$.valueChanges().subscribe(cart => {
-      if (!cart.items) { this.clearCart(); }
-      else {
+      if (!cart.items) { this.clearCart(); } else {
         this.productIds = Object.keys(cart.items);
         this.cart$ = cart.items;
         this.totalCount = this.getCountItems(cart);

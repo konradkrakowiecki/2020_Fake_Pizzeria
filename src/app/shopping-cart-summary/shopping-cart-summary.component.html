@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Zamówienie</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let item of cart">
+        <div class="mr-auto">{{item.quantity}} x {{item.product.title}}</div>
+        <div>{{item.quantity * item.product.price | number:'.2-2'}} zł</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="mr-auto">Suma</div>
+        <div>{{cart.totalPrice | number:'.2-2'}} zł</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
