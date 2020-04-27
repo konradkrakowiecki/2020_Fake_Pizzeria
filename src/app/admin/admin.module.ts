@@ -7,9 +7,12 @@ import { SharedModule } from '../shared/shared.module';
 import { DataTableModule } from 'angular7-data-table';
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../shared/services/auth-guard.service';
+import { AdminOrderDetailsComponent } from './components/admin-orders/admin-order-details/admin-order-details.component';
+import {MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
+    AdminOrderDetailsComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent
@@ -18,11 +21,13 @@ import { AuthGuardService } from '../shared/services/auth-guard.service';
     SharedModule,
     DataTableModule,
     RouterModule.forChild([
-      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
-      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] }
-    ])
+      {path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+      {path: 'admin/orders/:id', component: AdminOrderDetailsComponent, canActivate: [AuthGuardService, AdminAuthGuardService]}
+    ]),
+    MatIconModule
   ],
   providers: [
     AdminAuthGuardService

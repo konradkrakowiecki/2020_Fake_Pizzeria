@@ -16,7 +16,8 @@ import {
   MatCardModule,
   MatListModule,
   MatMenuModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatCheckboxModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
@@ -35,7 +36,8 @@ import {FormsModule} from '@angular/forms';
     MatCardModule,
     MatListModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCheckboxModule
   ],
   exports: [
     CommonModule,
@@ -49,7 +51,8 @@ import {FormsModule} from '@angular/forms';
     MatCardModule,
     MatListModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCheckboxModule
   ],
   providers: [
     AuthService,

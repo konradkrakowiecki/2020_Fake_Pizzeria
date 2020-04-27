@@ -34,7 +34,15 @@
 
       <data-table-column [property]="key">
         <ng-template #dataTableCell let-item="item">
-          <a [routerLink]="['/admin/products/', item.key]">Edit</a>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/admin/products/' + item.key]">
+              <mat-icon>edit</mat-icon>
+              <span>Edytuj</span>
+            </button>
+          </mat-menu>
         </ng-template>
       </data-table-column>
     </data-table>

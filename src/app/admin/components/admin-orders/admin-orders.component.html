@@ -1,22 +1,48 @@
 <div class="container">
-  <h1>Zamówienia</h1>
-  <table class="table table-hover">
-    <thead class="thead-dark">
-    <tr>
-      <th>Użytkownik</th>
-      <th>Data</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let order of orders$ | async">
-      <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date}}</td>
-      <td>
-        <a [routerLink]="['/admin/orders/' + order.key]">Podgląd</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div>
+    <data-table [title]="'Zamówienia'" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+      <data-table-column [property]="name" [header]="'Użytkownik'" [sortable]="true" [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          {{item.shipping.name}}
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column [property]="date" [header]="'Godzina / Data'" [sortable]="true" [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          {{item.datePlaced | date:'HH:mm / d-MM-yyyy'}}
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column [property]="isDeliver" [header]="'Dostarczane'" [sortable]="true" [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          <mat-checkbox [(ngModel)]="item.isDeliver" (change)="update(item)"></mat-checkbox>
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column [property]="isDone" [header]="'Zakończone'" [sortable]="true" [resizable]="true">
+        <ng-template #dataTableCell let-item="item">
+          <mat-checkbox [(ngModel)]="item.isDone" (change)="update(item)"></mat-checkbox>
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column [property]="actions">
+        <ng-template #dataTableCell let-item="item">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/admin/orders/' + item.key]">
+              <mat-icon>info</mat-icon>
+              <span>Zamówienie</span>
+            </button>
+            <button mat-menu-item (click)="delete(item)">
+              <mat-icon>remove_circle</mat-icon>
+              <span>Usuń</span>
+            </button>
+          </mat-menu>
+        </ng-template>
+      </data-table-column>
+    </data-table>
+  </div>
 </div>
 

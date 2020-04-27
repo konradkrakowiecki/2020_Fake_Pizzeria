@@ -1,0 +1,50 @@
+<div class="container">
+  <div *ngIf="cart">
+    <h4 class="mb-2 mt-1s" style="font-size: 1.5rem; font-family: inherit; font-weight: 500; line-height: 1.2;">Zamówienie</h4>
+    <table class="table table-hover" style="box-shadow: 0 0 15px rgb(236, 236, 236)">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Produkt</th>
+        <th class="text-center" style="width: 230px">Ilość</th>
+        <th class="text-right" style="width: 200px">Suma</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of cart.items">
+        <td>
+          <div [style.backgroundImage]="'url(' + item.product.imageUrl + ')'" class="thumbnail"></div>
+        </td>
+        <td>
+          {{ item.product.title }}
+        </td>
+        <td class="text-center">
+          x {{ item.quantity }}
+        </td>
+        <td class="text-right">
+          {{ item.totalPrice | number:'.2-2'}} zł
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th class="font-weight-bold">Suma</th>
+        <th></th>
+        <th></th>
+        <th class="text-right font-weight-bold">{{ totalPrice | number:'.2-2'}} zł</th>
+      </tr>
+      </tfoot>
+    </table>
+
+    <div>
+      <h4 class="mb-2 mt-1s" style="font-size: 1.5rem; font-family: inherit; font-weight: 500; line-height: 1.2;">Dane dostawy:</h4>
+      <p>Imię i nazwisko: <span class="float-right font-weight-bold">{{ cart.shipping.name }}</span></p>
+      <hr>
+      <p>Adres: <span class="float-right font-weight-bold">{{ cart.shipping.addressLine1 }}</span></p>
+      <hr>
+      <p>Adres: <span class="float-right font-weight-bold">{{ cart.shipping.addressLine2 }}</span></p>
+      <hr>
+      <p>Miasto: <span class="float-right font-weight-bold">{{ cart.shipping.city }}</span></p>
+    </div>
+</div>
+

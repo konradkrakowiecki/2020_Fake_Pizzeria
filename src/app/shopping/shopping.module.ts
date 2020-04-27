@@ -10,6 +10,8 @@ import { ShippingFormComponent } from './components/shipping-form/shipping-form.
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
+import {DataTableModule} from 'angular7-data-table';
+import {MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      { path: 'products', component: ProductsComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
-      { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
-      { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService] }
-    ])
+      {path: 'products', component: ProductsComponent},
+      {path: 'shopping-cart', component: ShoppingCartComponent},
+      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
+      {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
+      {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]}
+    ]),
+    DataTableModule,
+    MatIconModule
   ]
 })
 export class ShoppingModule { }
