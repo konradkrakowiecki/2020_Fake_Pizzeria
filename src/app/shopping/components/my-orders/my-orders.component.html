@@ -1,27 +1,27 @@
 <div class="container">
   <div>
     <data-table [title]="'Zamówienia'" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
-      <data-table-column [property]="date" [header]="'Godzina / Data'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'date'" [header]="'Godzina / Data'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           {{item.datePlaced | date:'HH:mm / d-MM-yyyy'}}
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="isDeliver" [header]="'Dostarczane'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'isDeliver'" [header]="'Dostarczane'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           <mat-icon *ngIf="!item.isDeliver">clear</mat-icon>
           <mat-icon *ngIf="item.isDeliver">done</mat-icon>
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="isDone" [header]="'Zakończone'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'isDone'" [header]="'Zakończone'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           <mat-icon *ngIf="!item.isDone">clear</mat-icon>
           <mat-icon *ngIf="item.isDone">done</mat-icon>
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="actions">
+      <data-table-column [property]="'actions'">
         <ng-template #dataTableCell let-item="item">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>

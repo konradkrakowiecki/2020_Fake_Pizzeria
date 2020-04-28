@@ -30,7 +30,7 @@ export class AdminProductsComponent implements OnDestroy {
   }
 
   reloadItems(params) {
-    if (!this.tableResource) { return; }
+    // if (!this.tableResource) { return; }
     this.tableResource.query(params).then(items => this.items = items);
   }
 

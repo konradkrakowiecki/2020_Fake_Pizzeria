@@ -14,25 +14,25 @@
 
   <div>
     <data-table [title]="'Produkty'" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
-      <data-table-column [property]="title" [header]="'Nazwa'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'title'" [header]="'Nazwa'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           {{item.title}}
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="price" [header]="'Cena'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'price'" [header]="'Cena'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           {{item.price | number:'.2-2'}}
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="category" [header]="'Kategoria'" [sortable]="true" [resizable]="true">
+      <data-table-column [property]="'category'" [header]="'Kategoria'" [sortable]="true" [resizable]="true">
         <ng-template #dataTableCell let-item="item">
           {{item.category.name}}
         </ng-template>
       </data-table-column>
 
-      <data-table-column [property]="key">
+      <data-table-column [property]="'key'">
         <ng-template #dataTableCell let-item="item">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
