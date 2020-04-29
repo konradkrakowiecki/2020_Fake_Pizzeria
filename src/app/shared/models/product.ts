@@ -5,4 +5,5 @@ export interface Product {
   imageUrl: string;
   price: number;
   category: object;
+  isAvailable: boolean;
 }

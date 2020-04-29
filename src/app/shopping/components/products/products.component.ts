@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     productService.getAll().pipe(
       switchMap(products => {
         this.products = products;
+        this.products = this.products.filter(product => product.isAvailable);
         return route.queryParamMap;
       }))
       .subscribe(params => {

@@ -32,14 +32,14 @@
               <mat-option *ngFor="let category of categories$ | async" [value]="category">{{category.name}}</mat-option>
             </mat-select>
             <mat-hint>Podaj kategorię produktu.</mat-hint>
-            <mat-error *ngIf="price.touched && price.invalid">Kategoria jest wymagana!</mat-error>
+            <mat-error *ngIf="category.touched && category.invalid">Kategoria jest wymagana!</mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field appearance="outline" [hideRequiredMarker]="true">
             <mat-label for="imageUrl">URL do zdjęcia</mat-label>
-            <input matInput #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" type="text" id="imageUrl" required url placeholder="http:// lub https://">
+            <input matInput #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" type="text" id="imageUrl" placeholder="http:// lub https://" required url>
             <mat-hint>Podaj adres URL do zdjęcia.</mat-hint>
             <mat-error *ngIf="imageUrl.touched && imageUrl.invalid">
               <mat-error *ngIf="imageUrl.errors.required">Adres URL jest wymagany!</mat-error>
@@ -56,8 +56,21 @@
           </mat-form-field>
         </div>
 
+        <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label for="isAvailable">Dostępność</mat-label>
+            <mat-select matInput #isAvailable="ngModel" [(ngModel)]="product.isAvailable" name="isAvailable" type="text" id="isAvailable" required>
+              <mat-option [value]="true">Dostępny</mat-option>
+              <mat-option [value]="false">Niedostępny</mat-option>
+            </mat-select>
+            <mat-hint>Podaj dostępność produktu.</mat-hint>
+            <mat-error *ngIf="isAvailable.touched && isAvailable.invalid">Ta opcja jest wymagana!</mat-error>
+          </mat-form-field>
+        </div>
+
         <div class="mt-2">
-          <button mat-flat-button color="primary" class="mr-2">Zapisz</button>
+          <button mat-flat-button *ngIf="form.invalid" disabled class="mr-2">Zapisz</button>
+          <button mat-flat-button *ngIf="!form.invalid"color="primary" class="mr-2">Zapisz</button>
           <button mat-flat-button type="button" (click)="delete()" color="primary">Usuń</button>
         </div>
       </form>
